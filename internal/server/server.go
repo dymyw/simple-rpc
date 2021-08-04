@@ -34,6 +34,7 @@ func (s *RPCServer) Register(fnName string, fnFunc interface{}) {
         return
     }
 
+    // 获取方法值
     s.funcs[fnName] = reflect.ValueOf(fnFunc)
 }
 
@@ -68,6 +69,7 @@ func (s *RPCServer) Execute(req dataserial.RPCdata) dataserial.RPCdata {
     // 获取错误
     var e string
     if _, ok := out[len(out)-1].Interface().(error); ok {
+        // 断言获取错误串
         e = out[len(out)-1].Interface().(error).Error()
     }
 
